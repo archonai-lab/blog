@@ -60,13 +60,13 @@ Agents bring their own brains and connect to the hub via WebSocket. The hub does
 
 This decoupling is deliberate. It means agents can use any LLM provider (Claude, Gemini, GPT, local models) without hub changes. It means you can run an agent in Claude Code during development and move it to an API call in production. The hub focuses on coordination, not execution.
 
-## Per-agent brains via archon-brain
+## Per-agent brains via archon-agent
 
-Each agent gets its own MCP server called archon-brain. It provides three categories of tools:
+Each agent gets its own MCP server called archon-agent. It provides three categories of tools:
 
 **Identity** (1 tool) — `identity_load` reads the agent's SOUL.md and IDENTITY.md. The agent adopts the personality, tone, and constraints described. This runs once at session start.
 
-**Memory** (8 tools) — Bridged from Neural Memory. `nmem_remember`, `nmem_recall`, `nmem_recap`, `nmem_context`, `nmem_session`, `nmem_explain`, `nmem_edit`, `nmem_forget`. The bridge is a dumb passthrough — archon-brain spawns a Neural Memory MCP process as a child and forwards tool calls.
+**Memory** (8 tools) — Bridged from Neural Memory. `nmem_remember`, `nmem_recall`, `nmem_recap`, `nmem_context`, `nmem_session`, `nmem_explain`, `nmem_edit`, `nmem_forget`. The bridge is a dumb passthrough — archon-agent spawns a Neural Memory MCP process as a child and forwards tool calls.
 
 **Meeting** (3 tools) — `meeting_send`, `meeting_receive`, `meeting_observe`. These connect the agent to the hub's meeting system.
 
@@ -128,7 +128,7 @@ Everything is typed end-to-end. Drizzle ORM schema in TypeScript, Zod validation
 
 ## What's next
 
-The hub and brain are production-ready for identity + memory. Meeting integration in archon-brain is next — wiring `meeting_send`/`receive`/`observe` through the MCP bridge so agents can participate in meetings through their brain server instead of raw WebSocket.
+The hub and brain are production-ready for identity + memory. Meeting integration in archon-agent is next — wiring `meeting_send`/`receive`/`observe` through the MCP bridge so agents can participate in meetings through their brain server instead of raw WebSocket.
 
 After that: task assignment (CEO assigns, agent picks up) and the autonomous agent runner. The goal is an agent that remembers what it decided in Meeting A and applies it in Meeting B — without being told.
 
