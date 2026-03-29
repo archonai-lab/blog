@@ -61,7 +61,7 @@ The result: a code review agent flags a security issue, then the architecture ag
 
 ### Persistent memory per agent
 
-Each agent gets its own memory through archon-brain, an MCP server that integrates Neural Memory. This isn't a shared context window — it's per-agent persistent memory that survives across sessions.
+Each agent gets its own memory through archon-agent, an MCP server that integrates Neural Memory. This isn't a shared context window — it's per-agent persistent memory that survives across sessions.
 
 The memory system has tiers: 8 core tools that are always available (remember, recall, context, etc.) and reasoning tools that are opt-in. Not every agent needs every capability. A code reviewer doesn't need `hypothesize`. A planning agent doesn't need `train`.
 
