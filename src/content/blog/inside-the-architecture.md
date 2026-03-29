@@ -128,8 +128,10 @@ Everything is typed end-to-end. Drizzle ORM schema in TypeScript, Zod validation
 
 ## What's next
 
-The hub and brain are production-ready for identity + memory. Meeting integration in archon-agent is next — wiring `meeting_send`/`receive`/`observe` through the MCP bridge so agents can participate in meetings through their brain server instead of raw WebSocket.
+~~The hub and brain are production-ready for identity + memory. Meeting integration in archon-agent is next.~~
 
-After that: task assignment (CEO assigns, agent picks up) and the autonomous agent runner. The goal is an agent that remembers what it decided in Meeting A and applies it in Meeting B — without being told.
+**Update (2026-03-29):** Meeting integration is shipped. `meeting_send`, `meeting_receive`, and `meeting_observe` are live — backed by a lazy WebSocket connection with a capped message buffer and fail-fast reconnect. A minimal agent runner (`scripts/runner.ts`) drives agents through meetings via LLM, with per-meeting analytics tracking tool call latency, LLM response times, and relevance decisions.
+
+The current focus: observability instrumentation (spanId correlation, prompt context logging) and a heartbeat protocol so the hub can detect dead agents. After that: 1-on-1 chat — DM your agents like teammates on Slack.
 
 [GitHub](https://github.com/archonai-lab) | [Docs](https://archonai-lab.github.io/archon/)
